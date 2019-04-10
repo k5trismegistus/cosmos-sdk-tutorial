@@ -40,7 +40,7 @@ func queryResolve(ctx sdk.Context, path []string, req abci.RequestQuery, keeper 
 
 	bz, err2 := codec.MarshalJSONIndent(keeper.cdc, QueryResResolve{value})
 	if err2 != nil {
-		paninc("could not marshal result to JSON")
+		panic("could not marshal result to JSON")
 	}
 	return bz, nil
 }

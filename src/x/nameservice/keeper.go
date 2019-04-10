@@ -13,15 +13,16 @@ type Keeper struct {
 	cdc        *codec.Codec
 }
 
-func (k Keeper) SetWhois(ctx sdk.Context, name String, whois Whois) {
+func (k Keeper) SetWhois(ctx sdk.Context, name string, whois Whois) {
 	if whois.Owner.Empty() {
 		return
 	}
-	store := ctx.KVSStore(k.storeKey)
+	store := ctx.KVStore(k.storeKey)
+	store.Set([]byte(name), k.cdc.MustMarshalBinaryBare(whois))
 }
 
-func (k Keeper) GetWhois(ctx sdk.Contxt, name String) Whois {
-	store := ctx.KVSStore(k.storeKey)
+func (k Keeper) GetWhois(ctx sdk.Context, name string) Whois {
+	store := ctx.KVStore(k.storeKey)
 	if !store.Has([]byte(name)) {
 		return NewWhois()
 	}

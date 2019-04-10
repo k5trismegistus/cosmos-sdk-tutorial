@@ -39,7 +39,7 @@ func (msg MsgSetName) GetSignBytes() []byte {
 	if err != nil {
 		panic(err)
 	}
-	return sdk.MustSortJson(b)
+	return sdk.MustSortJSON(b)
 }
 
 func (msg MsgSetName) GetSigners() []sdk.AccAddress {

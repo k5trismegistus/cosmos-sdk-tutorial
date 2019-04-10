@@ -1,9 +1,6 @@
 package nameservice
 
 import (
-	"fmt"
-	"strings"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -16,7 +13,7 @@ type Whois struct {
 var MinNamePrice = sdk.Coins{sdk.NewInt64Coin("nametoken", 1)}
 
 func NewWhois() Whois {
-	return Whois {
-		Price: MinNamePrice
+	return Whois{
+		Price: MinNamePrice,
 	}
 }

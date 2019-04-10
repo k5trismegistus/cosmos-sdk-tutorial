@@ -1,18 +1,16 @@
 package app
 
-package app
-
 import (
 	"encoding/json"
 
 	"github.com/tendermint/tendermint/libs/log"
 
+	"cosmos-sdk-tutorial/x/nameservice"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/cosmos/cosmos-sdk/x/params"
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	"cosmos-sdk-tutorial/x/nameservice"
 
 	bam "github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -48,9 +46,9 @@ func NewNameServiceApp(logger log.Logger, db dbm.DB) *nameServiceApp {
 	cdc := MakeCodec()
 	bApp := bam.NewBaseApp(appName, logger, db, auth.DefaultTxDecoder(cdc))
 
-	var app = &nameServiceApp {
+	var app = &nameServiceApp{
 		BaseApp: bApp,
-		cdc: cdc,
+		cdc:     cdc,
 
 		keyMain:          sdk.NewKVStoreKey("main"),
 		keyAccount:       sdk.NewKVStoreKey("acc"),
@@ -143,7 +141,7 @@ func (app *nameServiceApp) ExportAppStateAndValidators() (appState json.RawMessa
 	appendAccoutnsFn := func(acc auth.Account) bool {
 		account := &auth.BaseAccount{
 			Address: acc.GetAddress(),
-			Coins: acc.GetCoins(),
+			Coins:   acc.GetCoins(),
 		}
 
 		accounts = append(accounts, account)

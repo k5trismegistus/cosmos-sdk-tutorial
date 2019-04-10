@@ -29,7 +29,7 @@ func handleMsgSetName(ctx sdk.Context, keeper Keeper, msg MsgSetName) sdk.Result
 }
 
 func handleMsgBuyName(ctx sdk.Context, keeper Keeper, msg MsgBuyName) sdk.Result {
-	if keeper.GetPrice(ctx, msg.Name).IsAllGt(msg.Bid) {
+	if keeper.GetPrice(ctx, msg.Name).IsAllGT(msg.Bid) {
 		return sdk.ErrInsufficientCoins("Bid not high enough").Result()
 	}
 	if keeper.HasOwner(ctx, msg.Name) {
